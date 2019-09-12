@@ -5,7 +5,7 @@ import (
 	"fmt"
 	helper "github.com/tmluthfiana/phonebook/helper"
 	model "github.com/tmluthfiana/phonebook/model"
-	routing "modules/routing"
+	routing "github.com/tmluthfiana/phonebook/modules/routing"
 
 	"gopkg.in/mgo.v2/bson"
 

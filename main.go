@@ -1,8 +1,8 @@
 package main
 
 import (
+	routing "github.com/tmluthfiana/phonebook/modules/routing"
 	w "github.com/tmluthfiana/phonebook/webext"
-	routing "modules/routing"
 	"net/http"
 
 	_ "github.com/eaciit/dbox/dbc/mongo"

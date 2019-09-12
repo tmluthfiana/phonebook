@@ -2,7 +2,7 @@ package webext
 
 import (
 	. "github.com/tmluthfiana/phonebook/controllers"
-	routing "modules/routing"
+	routing "github.com/tmluthfiana/phonebook/modules/routing"
 )
 
 func RegisterClass() []interface{} {
