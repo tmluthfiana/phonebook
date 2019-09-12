@@ -88,12 +88,24 @@ func TestPhonebookView(t *testing.T) {
 }
 
 func TestPhonebookSave(t *testing.T) {
-	payload := model.Phonebook{}
 
-	payload.FirstName = "Agil"
-	payload.LastName = "D"
+	Phone := model.PhoneNumberDetail{
+		PhoneNo:   "081317595876",
+		ProneType: "Mobile",
+		PhoneExt:  "",
+	}
 
-	fmt.Println(fmt.Sprintf("payload TES %+v", payload))
+	PhoneDetail := []model.PhoneNumberDetail{}
+	PhoneDetail = append(PhoneDetail, Phone)
+
+	payload := model.Phonebook{
+		FirstName:   "Tias",
+		LastName:    "Faluthi",
+		PhoneNumber: PhoneDetail,
+		Email:       "triasluth@gmail.com",
+	}
+
+	// fmt.Println(fmt.Sprintf("payload TES %+v", payload))
 
 	out, err := json.Marshal(&payload)
 	if err != nil {
@@ -131,10 +143,34 @@ func TestPhonebookSave(t *testing.T) {
 }
 
 func TestPhonebookEdit(t *testing.T) {
-	payload := model.Phonebook{}
+	// for edit current phone number
+	// Phone := model.PhoneNumberDetail{
+	// 	PhoneNo:   "08223009617",
+	// 	ProneType: "Mobile",
+	// 	PhoneExt:  "",
+	// }
+	//PhoneDetail := []model.PhoneNumberDetail{}
+	// PhoneDetail = append(PhoneDetail, Phone)
 
-	payload.FirstName = "Agil"
-	payload.LastName = "D"
+	// for add new phone number
+	PhoneDetail := []model.PhoneNumberDetail{
+		{
+			PhoneNo:   "08223009617",
+			ProneType: "Mobile",
+			PhoneExt:  "",
+		},
+		{
+			PhoneNo:   "08123009615",
+			ProneType: "Mobile",
+			PhoneExt:  "",
+		},
+	}
+
+	payload := model.Phonebook{
+		FirstName:   "Agil",
+		LastName:    "D",
+		PhoneNumber: PhoneDetail,
+	}
 
 	out, err := json.Marshal(&payload)
 	if err != nil {
@@ -173,7 +209,7 @@ func TestPhonebookDelete(t *testing.T) {
 	payloadBuff := bytes.NewBufferString(Payload)
 
 	cli := http.Client{}
-	req, err := http.NewRequest(http.MethodPost, "http://localhost:3030/phonebook/delete/5d7a50e24db82327ee59c456", payloadBuff)
+	req, err := http.NewRequest(http.MethodPost, "http://localhost:3030/phonebook/delete/5d7ad69b7505711d7a832849", payloadBuff)
 	req.Header["Content-type"] = []string{"application/json"}
 	if err != nil {
 		t.Error("Failed Create Connection")
