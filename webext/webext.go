@@ -1,16 +1,15 @@
 package webext
 
 import (
-	. "productcategorymanagement/controllers"
-	routing "teja/routing"
+	. "github.com/tmluthfiana/phonebook/controllers"
+	routing "modules/routing"
 )
 
 func RegisterClass() []interface{} {
 	base := new(routing.BaseController)
 
 	ret := []interface{}{}
-	ret = append(ret, &Product{base})
-	ret = append(ret, &Category{base})
+	ret = append(ret, &Phonebook{base})
 
 	return ret
 }

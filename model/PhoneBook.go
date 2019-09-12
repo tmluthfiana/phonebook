@@ -7,10 +7,9 @@ import (
 	"gopkg.in/mgo.v2/bson"
 )
 
-type PhoneBook struct {
+type Phonebook struct {
 	orm.ModelBase `bson:"-" json:"-"`
 	Id            bson.ObjectId `bson:"_id"`
-	Code          string
 	FirstName     string
 	LastName      string
 	PhoneNumber   []PhoneNumberDetail
@@ -23,7 +22,7 @@ type PhoneBook struct {
 	UpdateBy      string
 }
 
-func (e *PhoneBook) PreSave() error {
+func (e *Phonebook) PreSave() error {
 	if e.Id == "" {
 		e.Id = bson.NewObjectId()
 		e.CreatedDate = time.Now()
@@ -39,13 +38,13 @@ func (e *PhoneBook) PreSave() error {
 type PhoneNumberDetail struct {
 	PhoneNo   string
 	ProneType string
-	PhoneExt  int
+	PhoneExt  string
 }
 
-func (e *PhoneBook) RecordID() interface{} {
+func (e *Phonebook) RecordID() interface{} {
 	return e.Id
 }
 
-func (m *PhoneBook) TableName() string {
-	return "phonebook"
+func (m *Phonebook) TableName() string {
+	return "Phonebook"
 }

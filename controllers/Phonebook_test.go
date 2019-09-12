@@ -4,13 +4,13 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	helper "github.com/tmluthfiana/phonebook/helper"
+	model "github.com/tmluthfiana/phonebook/model"
 	"net/http"
-	helper "phonebook/helper"
-	model "phonebook/model"
 	"testing"
 )
 
-func TestCategoryGet(t *testing.T) {
+func TestPhonebookGet(t *testing.T) {
 	payload := struct {
 		Take int
 		Skip int
@@ -38,7 +38,7 @@ func TestCategoryGet(t *testing.T) {
 		t.Error("Failed Call Connection")
 	}
 
-	response := helper.Result{}
+	response := model.Phonebook{}
 	decoder := json.NewDecoder(resp.Body)
 	defer resp.Body.Close()
 	err = decoder.Decode(&response)
@@ -48,8 +48,8 @@ func TestCategoryGet(t *testing.T) {
 	}
 }
 
-func TestCategoryView(t *testing.T) {
-	Id := "5d726cf13b3eb739d0a7271f"
+func TestPhonebookView(t *testing.T) {
+	Id := "5d7a50e24db82327ee59c456"
 	payload := struct {
 		Take int
 		Skip int
@@ -87,11 +87,11 @@ func TestCategoryView(t *testing.T) {
 	}
 }
 
-func TestCategorySave(t *testing.T) {
-	payload := model.Category{}
+func TestPhonebookSave(t *testing.T) {
+	payload := model.Phonebook{}
 
-	payload.Name = "Tes"
-	payload.Code = "Tes"
+	payload.FirstName = "Agil"
+	payload.LastName = "D"
 
 	fmt.Println(fmt.Sprintf("payload TES %+v", payload))
 
@@ -116,7 +116,7 @@ func TestCategorySave(t *testing.T) {
 		t.Error("Failed Call Connection")
 	}
 
-	response := model.Product{}
+	response := model.Phonebook{}
 	decoder := json.NewDecoder(resp.Body)
 	defer resp.Body.Close()
 	err = decoder.Decode(&response)
@@ -130,11 +130,11 @@ func TestCategorySave(t *testing.T) {
 	}
 }
 
-func TestCategoryEdit(t *testing.T) {
-	payload := model.Category{}
+func TestPhonebookEdit(t *testing.T) {
+	payload := model.Phonebook{}
 
-	payload.Name = "Rajman xxx"
-	payload.Code = "axsx"
+	payload.FirstName = "Agil"
+	payload.LastName = "D"
 
 	out, err := json.Marshal(&payload)
 	if err != nil {
@@ -143,7 +143,7 @@ func TestCategoryEdit(t *testing.T) {
 	payloadBuff := bytes.NewBufferString(string(out))
 
 	cli := http.Client{}
-	req, err := http.NewRequest(http.MethodPut, "http://localhost:3030/phonebook/edit/5d7277dc3b3eb74388d4f289", payloadBuff)
+	req, err := http.NewRequest(http.MethodPut, "http://localhost:3030/phonebook/edit/5d7a50e24db82327ee59c456", payloadBuff)
 	req.Header["Content-type"] = []string{"application/json"}
 	if err != nil {
 		t.Error("Failed Create Connection")
@@ -154,7 +154,7 @@ func TestCategoryEdit(t *testing.T) {
 		t.Error("Failed Call Connection")
 	}
 
-	response := model.Product{}
+	response := model.Phonebook{}
 	decoder := json.NewDecoder(resp.Body)
 	defer resp.Body.Close()
 	err = decoder.Decode(&response)
@@ -168,12 +168,12 @@ func TestCategoryEdit(t *testing.T) {
 	}
 }
 
-func TestCategoryDelete(t *testing.T) {
+func TestPhonebookDelete(t *testing.T) {
 	Payload := `{}`
 	payloadBuff := bytes.NewBufferString(Payload)
 
 	cli := http.Client{}
-	req, err := http.NewRequest(http.MethodPost, "http://localhost:3030/phonebook/delete/5d7277dc3b3eb74388d4f289", payloadBuff)
+	req, err := http.NewRequest(http.MethodPost, "http://localhost:3030/phonebook/delete/5d7a50e24db82327ee59c456", payloadBuff)
 	req.Header["Content-type"] = []string{"application/json"}
 	if err != nil {
 		t.Error("Failed Create Connection")
@@ -184,7 +184,7 @@ func TestCategoryDelete(t *testing.T) {
 		t.Error("Failed Call Connection")
 	}
 
-	response := model.Product{}
+	response := model.Phonebook{}
 	decoder := json.NewDecoder(resp.Body)
 	defer resp.Body.Close()
 	err = decoder.Decode(&response)

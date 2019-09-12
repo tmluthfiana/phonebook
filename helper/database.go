@@ -10,7 +10,7 @@ import (
 
 var GlobalConfig map[string]string = map[string]string{
 	"host":      "localhost:27017",
-	"database":  "apiapi",
+	"database":  "phonebook",
 	"username":  "",
 	"password":  "",
 	"mechanism": "DEFAULT",
