@@ -38,7 +38,7 @@ func TestPhonebookGet(t *testing.T) {
 		t.Error("Failed Call Connection")
 	}
 
-	response := model.Phonebook{}
+	response := helper.Result{}
 	decoder := json.NewDecoder(resp.Body)
 	defer resp.Body.Close()
 	err = decoder.Decode(&response)
