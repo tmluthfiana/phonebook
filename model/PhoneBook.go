@@ -9,11 +9,11 @@ import (
 
 type Phonebook struct {
 	orm.ModelBase `bson:"-" json:"-"`
-	Id            bson.ObjectId `bson:"_id"`
-	FirstName     string
-	LastName      string
+	Id            bson.ObjectId `bson:"_id" json:"_id"`
+	FirstName     string        `bson:"FirstName" json:"FirstName"`
+	LastName      string        `bson:"LastName" json:"LastName"`
 	PhoneNumber   []PhoneNumberDetail
-	Email         string
+	Email         string `bson:"Email" json:"Email"`
 	LastAction    string
 	Status        string
 	CreatedDate   time.Time
@@ -36,9 +36,9 @@ func (e *Phonebook) PreSave() error {
 }
 
 type PhoneNumberDetail struct {
-	PhoneNo   string
-	ProneType string
-	PhoneExt  string
+	PhoneNo   string `bson:"PhoneNo" json:"PhoneNo"`
+	ProneType string `bson:"ProneType" json:"ProneType"`
+	PhoneExt  string `bson:"PhoneExt" json:"PhoneExt"`
 }
 
 func (e *Phonebook) RecordID() interface{} {

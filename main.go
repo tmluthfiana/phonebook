@@ -11,11 +11,11 @@ import (
 func main() {
 	routing := routing.NewRouting("phonebook/controllers", w.RegisterClass())
 
-	routing.Get("/phonebook/get", "phonebook.Get")
-	routing.Get("/phonebook/view/{id}", "phonebook.Get")
-	routing.Post("/phonebook/save", "phonebook.Save")
-	routing.Put("/phonebook/edit/{id}", "phonebook.Save")
-	routing.Delete("/phonebook/delete/{id}", "phonebook.Delete")
+	routing.Get("/phonebook/get", "Phonebook.Get")
+	routing.Get("/phonebook/view/{id}", "Phonebook.Get")
+	routing.Post("/phonebook/save", "Phonebook.Save")
+	routing.Put("/phonebook/edit/{id}", "Phonebook.Save")
+	routing.Delete("/phonebook/delete/{id}", "Phonebook.Delete")
 
 	http.ListenAndServe(":3030", routing.Routing())
 }
