@@ -8,12 +8,9 @@ import (
 	helper "phonebook/helper"
 	model "phonebook/model"
 	"testing"
-	"time"
-
-	"gopkg.in/mgo.v2/bson"
 )
 
-func TestGet(t *testing.T) {
+func TestCategoryGet(t *testing.T) {
 	payload := struct {
 		Take int
 		Skip int
@@ -51,8 +48,8 @@ func TestGet(t *testing.T) {
 	}
 }
 
-func TestView(t *testing.T) {
-	Id := "5d72709a3b3eb70eb0753e05"
+func TestCategoryView(t *testing.T) {
+	Id := "5d726cf13b3eb739d0a7271f"
 	payload := struct {
 		Take int
 		Skip int
@@ -90,26 +87,11 @@ func TestView(t *testing.T) {
 	}
 }
 
-func TestSave(t *testing.T) {
-	payload := model.Product{}
+func TestCategorySave(t *testing.T) {
+	payload := model.Category{}
 
 	payload.Name = "Tes"
 	payload.Code = "Tes"
-	payload.Category = &model.Category{
-		Id:   bson.ObjectIdHex("5d72709a3b3eb70eb0753e05"),
-		Code: "xx",
-		Name: "xx",
-	}
-
-	pricing := model.ProductPricing{
-		Price:     989000,
-		StartDate: time.Now(),
-		EndDate:   time.Now(),
-	}
-	arPricing := []*model.ProductPricing{}
-	arPricing = append(arPricing, &pricing)
-
-	payload.Pricing = arPricing
 
 	fmt.Println(fmt.Sprintf("payload TES %+v", payload))
 
@@ -148,28 +130,11 @@ func TestSave(t *testing.T) {
 	}
 }
 
-func TestEdit(t *testing.T) {
-	payload := model.Product{}
+func TestCategoryEdit(t *testing.T) {
+	payload := model.Category{}
 
 	payload.Name = "Rajman xxx"
 	payload.Code = "axsx"
-	payload.Category = &model.Category{
-		Id:   bson.ObjectIdHex("5d72709a3b3eb70eb0753e05"),
-		Code: "xx",
-		Name: "xx",
-	}
-
-	pricing := model.ProductPricing{
-		Price:     989000,
-		StartDate: time.Now(),
-		EndDate:   time.Now(),
-	}
-	arPricing := []*model.ProductPricing{}
-	arPricing = append(arPricing, &pricing)
-
-	payload.Pricing = arPricing
-
-	fmt.Println(fmt.Sprintf("payload TES %+v", payload))
 
 	out, err := json.Marshal(&payload)
 	if err != nil {
@@ -178,7 +143,7 @@ func TestEdit(t *testing.T) {
 	payloadBuff := bytes.NewBufferString(string(out))
 
 	cli := http.Client{}
-	req, err := http.NewRequest(http.MethodPost, "http://localhost:3030/phonebook/edit/5d7276b03b3eb74388d4f286", payloadBuff)
+	req, err := http.NewRequest(http.MethodPut, "http://localhost:3030/phonebook/edit/5d7277dc3b3eb74388d4f289", payloadBuff)
 	req.Header["Content-type"] = []string{"application/json"}
 	if err != nil {
 		t.Error("Failed Create Connection")
@@ -203,12 +168,12 @@ func TestEdit(t *testing.T) {
 	}
 }
 
-func TestDelete(t *testing.T) {
+func TestCategoryDelete(t *testing.T) {
 	Payload := `{}`
 	payloadBuff := bytes.NewBufferString(Payload)
 
 	cli := http.Client{}
-	req, err := http.NewRequest(http.MethodPost, "http://localhost:3030/phonebook/delete/5d7276b03b3eb74388d4f286", payloadBuff)
+	req, err := http.NewRequest(http.MethodPost, "http://localhost:3030/phonebook/delete/5d7277dc3b3eb74388d4f289", payloadBuff)
 	req.Header["Content-type"] = []string{"application/json"}
 	if err != nil {
 		t.Error("Failed Create Connection")
