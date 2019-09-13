@@ -20,4 +20,4 @@ Phonebook REST API
 
 # Usage
 - use postman to test it or
-- running file test with : go test -v -run (function name)
+- running file test in controllers folder with : go test -v -run (function name)
