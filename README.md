@@ -10,6 +10,7 @@ Phonebook REST API
 - go to https://www.getpostman.com/downloads/ download and install
 
 # Install Package Library
+- restore database  mongorestore --host 127.0.0.1 --port 27017 --db phonebook --drop "E:/github.com/tmluthfiana/phonebook/db"
 - go mod init github.com/tmluthfiana/phonebook
 - go mod vendor
 
